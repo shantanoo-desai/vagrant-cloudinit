@@ -9,7 +9,8 @@ VAGRANT_COMMAND = ARGV[0]
 Vagrant.configure("2") do |config|
   # install plugin for env vars: vagrant plugin install vagrant-disksize
   config.env.enable # needed for Cloud-Init experimental setup
-  
+  config.vm.define "egdey-ubuntu"
+  # config.vm.hostname = "edgeybuntu"  
   # Base Ubuntu 20.04 LTS Image	
   config.vm.box = "ubuntu/focal64"
 
@@ -19,10 +20,10 @@ Vagrant.configure("2") do |config|
   # cloud-init script
   config.vm.cloud_init do |cloud_init|
     cloud_init.content_type = "text/cloud-config"
-    cloud_init.path         = "cloud-init-test"
+    cloud_init.path         = "user-data.yml"
   end
 
-  if VAGRANT_COMMAND == "ssh"
-    config.ssh.username = 'user'
-  end
+#if VAGRANT_COMMAND == "ssh"
+#   config.ssh.username = "user"
+#end
 end
